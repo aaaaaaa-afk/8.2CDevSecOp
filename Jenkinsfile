@@ -33,12 +33,13 @@ pipeline {
         }
         stage('SonarCloud Analysis') {
             steps {
+                cleanWs()
                 powershell '''
                     if (-not (Test-Path "sonar-scanner-cli.zip")) {
-                        Invoke-WebRequest -Uri "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-windows.zip" -OutFile "sonar-scanner-cli.zip"
+                        Invoke-WebRequest -Uri "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-windows-x64.zip" -OutFile "sonar-scanner-cli.zip"
                     }
 
-                    if (-not (Test-Path "sonar-scanner-5.0.1.3006-windows")) {
+                    if (-not (Test-Path "sonar-scanner-6.2.1.4610-windows-x64")) {
                         Expand-Archive -Path "sonar-scanner-cli.zip" -DestinationPath "." -Force
                     }
 
