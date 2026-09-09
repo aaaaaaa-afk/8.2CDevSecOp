@@ -34,6 +34,7 @@ pipeline {
         stage('SonarCloud Analysis') {
             steps {
                 cleanWs()
+                checkout scm
                 powershell '''
                     if (-not (Test-Path "sonar-scanner-cli.zip")) {
                         Invoke-WebRequest -Uri "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-windows-x64.zip" -OutFile "sonar-scanner-cli.zip"
